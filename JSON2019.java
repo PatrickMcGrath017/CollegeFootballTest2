@@ -137,6 +137,8 @@ public class JSON2019{
 									"printWeek\t Prints all games of a week.\n " +
 									"printTeamWeek\t Prints all games of a team in a week.\n " +
 									"printDetailedGame\t Prints specific details of a single game.\n " +
+									"printExciteGame\t Prints most exciting games from season.\n " +
+									"printExciteWeek\t Prints most exciting games in a week.\n " + 
 									"exit";
 
 				System.out.println(getInput);
@@ -215,6 +217,48 @@ public class JSON2019{
 						if(playedthisgame == false){
 							System.out.println(awayteam + " did not play at " + hometeam);
 						}
+					}
+					else if(option.compareTo("printExciteGame") == 0){
+						Game[] topGames = new Game[3];
+						topGames[0] = new Game(0, "", "", 0, "", 0, 0f);
+						topGames[1] = new Game(0, "", "", 0, "", 0, 0f);
+						topGames[2] = new Game(0, "", "", 0, "", 0, 0f);
+						for(Game game : games){
+							if(game.excitementindex > topGames[0].excitementindex){
+								topGames[0] = game;
+							}
+							else if(game.excitementindex > topGames[1].excitementindex){
+								topGames[1] = game;
+							}
+							else if(game.excitementindex > topGames[2].excitementindex){
+								topGames[2] = game;
+							}
+						}
+						System.out.println(topGames[0] + " " + topGames[0].excitementindex);
+						System.out.println(topGames[1] + " " + topGames[1].excitementindex);
+						System.out.println(topGames[2] + " " + topGames[2].excitementindex);
+					}
+					else if(option.compareTo("printExciteWeek") == 0){
+						System.out.println("Enter week: ");
+						int week = newScan.nextInt(); newScan.nextLine();
+						Game[] topGamesWeek = new Game[3];
+						topGamesWeek[0] = new Game(0, "", "", 0, "", 0, 0f);
+						topGamesWeek[1] = new Game(0, "", "", 0, "", 0, 0f);
+						topGamesWeek[2] = new Game(0, "", "", 0, "", 0, 0f);
+						for(Game game : games){
+							if(game.excitementindex > topGamesWeek[0].excitementindex && game.week == week){
+								topGamesWeek[0] = game;
+							}
+							else if(game.excitementindex > topGamesWeek[1].excitementindex && game.week == week){
+								topGamesWeek[1] = game;
+							}
+							else if(game.excitementindex > topGamesWeek[2].excitementindex && game.week == week){
+								topGamesWeek[2] = game;
+							}
+						}
+						System.out.println(topGamesWeek[0] + " " + topGamesWeek[0].excitementindex);
+						System.out.println(topGamesWeek[1] + " " + topGamesWeek[1].excitementindex);
+						System.out.println(topGamesWeek[2] + " " + topGamesWeek[2].excitementindex);
 					}
 					else if(option.compareTo("exit") == 0){
 						break;
