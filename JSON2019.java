@@ -138,7 +138,8 @@ public class JSON2019{
 									"printTeamWeek\t Prints all games of a team in a week.\n " +
 									"printDetailedGame\t Prints specific details of a single game.\n " +
 									"printExciteGame\t Prints most exciting games from season.\n " +
-									"printExciteWeek\t Prints most exciting games in a week.\n " + 
+									"printExciteWeek\t Prints most exciting games in a week.\n " +
+								    "printExciteTeam\t Prints most exciting games of a team.\n " +	
 									"exit";
 
 				System.out.println(getInput);
@@ -259,6 +260,28 @@ public class JSON2019{
 						System.out.println(topGamesWeek[0] + " " + topGamesWeek[0].excitementindex);
 						System.out.println(topGamesWeek[1] + " " + topGamesWeek[1].excitementindex);
 						System.out.println(topGamesWeek[2] + " " + topGamesWeek[2].excitementindex);
+					}
+					else if(option.compareTo("printExciteTeam") == 0){
+						System.out.println("Enter team: ");
+						String team = newScan.nextLine();
+						Game[] topGamesTeam = new Game[3];
+						topGamesTeam[0] = new Game(0, "", "", 0, "", 0, 0f);
+						topGamesTeam[1] = new Game(0, "", "", 0, "", 0, 0f);
+						topGamesTeam[2] = new Game(0, "", "", 0, "", 0, 0f);
+						for(Game game : games){
+							if(game.excitementindex > topGamesTeam[0].excitementindex && (team.compareTo(game.homename) == 0 || team.compareTo(game.awayname) == 0)){
+								topGamesTeam[0] = game;
+							}
+							else if(game.excitementindex > topGamesTeam[1].excitementindex && (team.compareTo(game.homename) == 0 || team.compareTo(game.awayname) == 0)){
+								topGamesTeam[1] = game;
+							}
+							else if(game.excitementindex > topGamesTeam[2].excitementindex && (team.compareTo(game.homename) == 0 || team.compareTo(game.awayname) == 0)){
+								topGamesTeam[2] = game;
+							}
+						}
+						System.out.println(topGamesTeam[0] + " " + topGamesTeam[0].excitementindex);
+						System.out.println(topGamesTeam[1] + " " + topGamesTeam[1].excitementindex);
+						System.out.println(topGamesTeam[2] + " " + topGamesTeam[2].excitementindex);
 					}
 					else if(option.compareTo("exit") == 0){
 						break;
